@@ -33,11 +33,18 @@ public class CardDeck extends CardSet
 	public Card removeCardOnTop()
 	{
 		if (!cards.isEmpty())
-			return cards.get(0);
+			return cards.remove(0);
 		return null;
 	}
 	
 	// TO DO
 	public void shuffle() {}
 	
+	public void addCards(CardSet cardSet)
+	{
+		for (Card card : cardSet.cards)
+		{
+			addCard(card);
+		}
+	}
 }
