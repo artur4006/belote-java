@@ -15,8 +15,8 @@ public class Main
 		controller.initGame();
 		controller.startGame();
 		
-		model.getFirstTeam().getFirstPlayer().getHand().addCard(model.getDeck().getCard(25));
-		model.getFirstTeam().getFirstPlayer().getHand().addCard(model.getDeck().getCard(24));
-		model.getFirstTeam().getFirstPlayer().getHand().addCard(model.getDeck().getCard(11));
+//		model.getFirstTeam().getFirstPlayer().getHand().addCard(model.getDeck().getCard(25));
+//		model.getFirstTeam().getFirstPlayer().getHand().addCard(model.getDeck().getCard(24));
+//		model.getFirstTeam().getFirstPlayer().getHand().addCard(model.getDeck().getCard(11));
 	}
 }
