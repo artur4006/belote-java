@@ -32,6 +32,37 @@ public class Card
 		this.value = value;
 	}
 
+	public int compareTo(Card card, CardColor trumpColor) 
+	{
+		if (getColor() != card.getColor())
+		{
+			String s = "Impossible to compare cards with different colors." +
+			"\nCard 1: " + toString() +
+			"\nCard 2: " + card;
+			throw new IllegalArgumentException(s);
+		}
+		
+		if (trumpColor == null)
+		{
+			throw new IllegalArgumentException("Trump color can not be null");
+		}
+		
+		int compare = this.getPoints(trumpColor).compareTo(card.getPoints(trumpColor));
+		if (compare == 0) // only happens when both cards are worth 0 points
+			// i.e equals to 7, 8, or non trump 9
+		{
+			if (this.value == CardValue.SEVEN || card.value == CardValue.NINE)
+			{
+				compare = -1;
+			}
+			else
+			{
+				compare = 1;
+			}
+		}
+		return compare;
+	}
+	
 	public Integer getPoints(CardColor trumpColor)
 	{
 		if (value == CardValue.NINE && color == trumpColor)

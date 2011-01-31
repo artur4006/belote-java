@@ -1,11 +1,9 @@
 package com.laguille.belote.model.player;
 
-import java.util.Observable;
-
 import com.laguille.belote.model.card.Card;
 import com.laguille.belote.model.cardset.CardHand;
 
-public class Player extends Observable
+public class Player
 {
 	protected String name;
 	protected final CardHand hand;
@@ -40,18 +38,6 @@ public class Player extends Observable
 		this.hand = hand;
 	}
 	*/
-	public Card getCardPlayed()
-	{
-		return cardPlayed;
-	}
-
-	public void setCardPlayed(Card cardPlayed)
-	{
-		this.cardPlayed = cardPlayed;
-		setChanged();
-		notifyObservers(cardPlayed);
-	}
-
 	public boolean isTaker()
 	{
 		return isTaker;

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Observable;
 
 import com.laguille.belote.model.card.Card;
+import com.laguille.belote.model.card.CardColor;
 
 public abstract class CardSet extends Observable
 {
@@ -20,6 +21,11 @@ public abstract class CardSet extends Observable
 	public Card getCard(int index)
 	{
 		return cards.get(index);
+	}
+	
+	public List<Card> getCards()
+	{
+		return cards;
 	}
 	
 	public void sort(Comparator<Card> comparator)
@@ -75,5 +81,44 @@ public abstract class CardSet extends Observable
 	{
 		return cards.contains(card);
 	}
+	
+	public boolean contains(CardColor color)
+	{
+		for(Card card : cards)
+		{
+			if (card.getColor() == color)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
+	public int getSize() 
+	{
+		return cards.size();
+	}
+	
+	/**
+	 * Compare the input card parameter with the value of the cards in the set of the same color
+	 * @param card the card to compare
+	 * @param trumpColor the trump color
+	 * @return 1 if the card the highest card value in the set is higher than the card
+	 * 			-1 otherwise
+	 */
+	public int compareTo(Card card, CardColor trumpColor)
+	{
+		for (Card c : cards)
+		{
+			if (c.getColor() == card.getColor())
+			{
+				if (c.compareTo(card, trumpColor) > 0)
+				{
+					return 1;
+				}
+			}
+		}
+		return -1;
+	}
+	
 }
