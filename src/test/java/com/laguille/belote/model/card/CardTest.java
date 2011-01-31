@@ -14,14 +14,21 @@ import org.junit.Test;
 public class CardTest
 {
 
+	
 	@Test
-	public void assertEquals()
+	public void testEquals()
 	{
-		Card c1 = new Card(CardColor.DIAMOND, CardValue.NINE);
-		Card c2 = new Card(CardColor.DIAMOND, CardValue.SEVEN);
-		Card c3 = new Card(CardColor.DIAMOND, CardValue.NINE);
+		Card c1, c2, c3, c4;
+		c1 = new Card(CardColor.DIAMOND, CardValue.NINE);
+		c2 = new Card(CardColor.DIAMOND, CardValue.SEVEN);
+		c3 = new Card(CardColor.DIAMOND, CardValue.NINE);		
+		c4 = new Card(CardColor.HEART, CardValue.NINE);
+		Assert.assertEquals(c1, c1);
+		Assert.assertFalse(c1.equals(new Object()));
 		Assert.assertEquals(c1, c3);
 		Assert.assertFalse(c1.equals(c2));
+		Assert.assertFalse(c1.equals(c4));
 	}
-
+	
+	
 }
