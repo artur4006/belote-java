@@ -21,11 +21,14 @@ public class GameModel extends Observable
 	protected Player currentDistributer;
 	protected CardColor trumpColor;
 	protected Card bidCard;
+	protected int drawPoints; // 'litige' points in case of a draw
 	
 	public GameModel()
 	{
-		firstTeam = new Team();
-		secondTeam = new Team();
+		firstTeam = new Team("Team 1");
+		secondTeam = new Team("Team 2");
+		drawPoints = 0;
+		
 		deck = CardDeck.getInstance();
 		table = new CardTable();
 		players = new Player[4];                                //    2
@@ -125,6 +128,34 @@ public class GameModel extends Observable
 		return null;
 	}
 	
+	public Team getTeam(Player player)
+	{
+		Team team = null;
+		if (firstTeam.getFirstPlayer().equals(player) || firstTeam.getSecondPlayer().equals(player))
+		{
+			team = firstTeam;
+		}
+		else if (secondTeam.getFirstPlayer().equals(player) || secondTeam.getSecondPlayer().equals(player))
+		{
+			team = secondTeam;
+		}
+		return team;
+	}
+	
+	public Team getOppositeTeam(Team team)
+	{
+		Team oppositeTeam = null;
+		if (team.equals(firstTeam))
+		{
+			oppositeTeam = secondTeam;
+		}
+		else if (team.equals(secondTeam))
+		{
+			oppositeTeam = firstTeam;
+		}
+		return oppositeTeam;
+	}
+	
 	
 	/**
 	 * @return the cards played on the table
@@ -132,6 +163,14 @@ public class GameModel extends Observable
 	public CardTable getTable()
 	{
 		return table;
+	}
+	
+	public int getDrawPoints() {
+		return drawPoints;
+	}
+
+	public void setDrawPoints(int drawPoints) {
+		this.drawPoints = drawPoints;
 	}
 
 	public void prepareNextRound() // prepare the next round by resetting the taker, the trump color, and incrementing the distributer.

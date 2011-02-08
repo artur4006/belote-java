@@ -26,15 +26,15 @@ public class AIController implements InterfaceController
 	@Override
 	public String getUserName()
 	{
-		if (model.getFirstTeam().getFirstPlayer() == player)
+		if (model.getFirstTeam().getFirstPlayer().equals(player))
 		{
 			return "Player South";
 		}
-		else if (model.getSecondTeam().getFirstPlayer() == player)
+		else if (model.getSecondTeam().getFirstPlayer().equals(player))
 		{
 			return "Player West";
 		}
-		else if (model.getFirstTeam().getSecondPlayer() == player)
+		else if (model.getFirstTeam().getSecondPlayer().equals(player))
 		{
 			return "Player North";
 		}
