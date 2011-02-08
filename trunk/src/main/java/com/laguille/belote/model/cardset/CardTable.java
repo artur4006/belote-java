@@ -9,7 +9,6 @@ import java.util.Observable;
 import com.laguille.belote.model.card.Card;
 import com.laguille.belote.model.card.CardColor;
 import com.laguille.belote.model.player.Player;
-import com.laguille.belote.model.player.Team;
 
 
 /*
@@ -19,6 +18,7 @@ import com.laguille.belote.model.player.Team;
 public class CardTable extends Observable
 {
 	protected Map<Player, Card> table; // map the card played by a player
+	private CardColor askedColor;
 	
 	public CardTable()
 	{
@@ -36,6 +36,10 @@ public class CardTable extends Observable
 	
 	public void add(Player player, Card card)
 	{
+		if (table.isEmpty())
+		{
+			askedColor = card.getColor();
+		}
 		table.put(player, card);
 		setChanged();
 		notifyObservers();
@@ -85,16 +89,17 @@ public class CardTable extends Observable
 		return table.isEmpty();
 	}
 	
-	public Team getWinner(CardColor trumpColor)
+	public Player getWinner(CardColor trumpColor)
 	{
 		Player winner = table.keySet().toArray(new Player[0])[0];
 		for (Player player : table.keySet())
 		{
-			if (table.get(player).compareTo(table.get(winner), trumpColor) > 0) 
+			CardComparator comparator = CardComparator.instance(trumpColor, askedColor);
+			if (comparator.compare(table.get(player), table.get(winner)) > 0) 
 			{
 				winner = player;
 			}
 		}
-		return winner.
+		return winner;
 	}
 }

@@ -10,16 +10,20 @@ import com.laguille.belote.model.card.CardColor;
 import com.laguille.belote.model.cardset.CardDeck;
 import com.laguille.belote.model.player.Player;
 import com.laguille.belote.model.player.Team;
+import com.laguille.belote.referee.RefereeEngine;
+import com.laguille.belote.referee.RoundResult;
 
 public class GameController
 {
 
 	protected GameModel model;
 	protected Map<Player, InterfaceController> pcMap; // map a player to a controller 
+	protected RefereeEngine referee;
 	
 	public GameController(GameModel model)
 	{
 		this.model = model;
+		this.referee = new RefereeEngine(model);
 		
 		pcMap = new HashMap<Player, InterfaceController>();
 
@@ -108,6 +112,7 @@ public class GameController
 			// if bid, distribute
 			distributeCardsSecondRound();
 			
+			Team lastRoundWinner = null;
 			int nbTricks = model.getCurrentPlayer().getHand().getSize();
 			for (int n = 0 ; n < nbTricks ; n++)
 			{
@@ -133,15 +138,15 @@ public class GameController
 				}
 		
 				// ref engine decides which player wins the round
-				//TODO: Winner team
-				Team winnerTeam = model.getFirstTeam();
+				lastRoundWinner = referee.getRoundWinner();
 				// cards are transferred to the team card stack
 				List<Card> cardTable = model.getTable().removeAll();
-				winnerTeam.getCardStack().addAll(cardTable);
+				lastRoundWinner.getCardStack().addAll(cardTable);
 				// and so on for 8 rounds
 			}		
 			// ref engine decides the score (capot, dedans, ...)
-			
+			RoundResult result = referee.getResultAndUpdateScore(lastRoundWinner);
+
 			// 	cards are moved back into the deck:	putCardBackIntoDeck(model.getDeck(), model.getPlayers());
 			putCardsBackIntoDeck(model.getDeck(), new Team[]{model.getFirstTeam(), model.getSecondTeam()});
 			

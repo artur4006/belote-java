@@ -47,5 +47,10 @@ public class Player
 	{
 		this.isTaker = isTaker;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		Player player = (Player)obj;
+		return player == this; // we can not duplicate a player
+	}
 }
