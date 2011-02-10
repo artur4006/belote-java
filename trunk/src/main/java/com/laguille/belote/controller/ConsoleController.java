@@ -56,7 +56,7 @@ public class ConsoleController implements InterfaceController
 		}
 		*/
 		view.askUserName();
-		String userName = "g";
+		String userName = "Player South";
 		return userName;
 	}
 	

@@ -8,6 +8,7 @@ import java.util.Observable;
 
 import com.laguille.belote.model.card.Card;
 import com.laguille.belote.model.card.CardColor;
+import com.laguille.belote.model.card.CardValue;
 
 public abstract class CardSet extends Observable
 {
@@ -21,6 +22,18 @@ public abstract class CardSet extends Observable
 	public Card getCard(int index)
 	{
 		return cards.get(index);
+	}
+	
+	public Card getCard(CardValue cardValue, CardColor cardColor)
+	{
+		for (Card card : cards)
+		{
+			if (card.getValue().equals(cardValue) && card.getColor().equals(cardColor))
+			{
+				return card;
+			}
+		}
+		return null;
 	}
 	
 	public List<Card> getCards()
