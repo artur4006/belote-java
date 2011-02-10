@@ -10,6 +10,7 @@ public class RefereeEngine {
 
 	private GameModel model;
 	private int drawScore;
+	private final int FINAL_SCORE = 1000;
 	
 	public RefereeEngine(GameModel model)
 	{
@@ -102,4 +103,26 @@ public class RefereeEngine {
 		return score;
 	}
 	
+	public boolean isGameOver()
+	{
+		return (model.getFirstTeam().getScore() >= 1000 
+				|| model.getSecondTeam().getScore() >= 1000)
+				&& model.getFirstTeam().getScore() != model.getSecondTeam().getScore();
+	}
+	
+	public Team getGameWinner()
+	{
+		if (!isGameOver())
+		{
+			return null;
+		}
+		else if (model.getFirstTeam().getScore() > model.getSecondTeam().getScore())
+		{
+			return model.getFirstTeam();
+		}
+		else
+		{
+			return model.getSecondTeam();
+		}
+	}
 }

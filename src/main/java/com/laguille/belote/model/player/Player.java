@@ -53,4 +53,10 @@ public class Player
 		Player player = (Player)obj;
 		return player == this; // we can not duplicate a player
 	}
+
+	@Override
+	public String toString() {
+		return getName();
+	}
+	
 }

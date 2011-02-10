@@ -30,5 +30,11 @@
 			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.c2.fit</groupId>
+			<artifactId>fit</artifactId>
+			<version>1.1</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>
