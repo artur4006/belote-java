@@ -1,0 +1,1 @@
+This project will implement the belote card game using the Java language
